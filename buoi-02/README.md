@@ -8,3 +8,7 @@
 - [Bài 4 - Tính thành tiền](./bai-tap-tren-lop/bai-04/index.php)
 - [Bài 5 - Bảng điểm sinh viên](./bai-tap-tren-lop/bai-05/index.php)
 
+## Bài tập về nhà
+
+- [Form nhập và hiển thị bài viết](./bai-tap-ve-nha/index.php)
+
