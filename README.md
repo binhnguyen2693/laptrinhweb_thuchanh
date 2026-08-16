@@ -7,5 +7,3 @@ Repository cá nhân lưu trữ bài tập thực hành của học phần Lập
 - Họ và tên: Trần Nguyễn Bình Nguyên
 - Mã sinh viên: 224001819
 - Lớp: Lập trình web
-
-hihi
