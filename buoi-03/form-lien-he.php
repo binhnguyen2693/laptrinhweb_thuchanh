@@ -6,6 +6,7 @@ $chuDe = 'Hỗ trợ kỹ thuật';
 $noiDung = '';
 $loi = [];
 $thanhCong = false;
+$duoiTepAnh = '';
 
 function hienThiAnToan($giaTri)
 {
@@ -17,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email'] ?? '');
     $chuDe = trim($_POST['chuDe'] ?? 'Hỗ trợ kỹ thuật');
     $noiDung = trim($_POST['noiDung'] ?? '');
+    $anhDaiDien = $_FILES['anhDaiDien'] ?? null;
 
     if ($hoTen === '') {
         $loi['hoTen'] = 'Vui lòng nhập họ tên.';
@@ -32,12 +34,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $loi['noiDung'] = 'Vui lòng nhập nội dung liên hệ.';
     }
 
+    if ($anhDaiDien === null || $anhDaiDien['error'] === UPLOAD_ERR_NO_FILE) {
+        $loi['anhDaiDien'] = 'Vui lòng chọn ảnh đại diện.';
+    } elseif ($anhDaiDien['error'] !== UPLOAD_ERR_OK) {
+        $loi['anhDaiDien'] = 'Không thể tải ảnh lên. Vui lòng thử lại.';
+    } elseif ($anhDaiDien['size'] > 2 * 1024 * 1024) {
+        $loi['anhDaiDien'] = 'Ảnh đại diện không được lớn hơn 2 MB.';
+    } else {
+        $thongTinAnh = @getimagesize($anhDaiDien['tmp_name']);
+        $loaiAnhChoPhep = [
+            'image/jpeg' => 'jpg',
+            'image/png' => 'png',
+            'image/gif' => 'gif',
+            'image/webp' => 'webp',
+        ];
+        $loaiTep = $thongTinAnh['mime'] ?? '';
+
+        if (!isset($loaiAnhChoPhep[$loaiTep])) {
+            $loi['anhDaiDien'] = 'Tệp đã chọn phải là ảnh JPG, PNG, GIF hoặc WEBP.';
+        } else {
+            $duoiTepAnh = $loaiAnhChoPhep[$loaiTep];
+        }
+    }
+
     if (count($loi) === 0) {
-        $thanhCong = true;
-        $hoTen = '';
-        $email = '';
-        $chuDe = 'Hỗ trợ kỹ thuật';
-        $noiDung = '';
+        $thuMucAnh = __DIR__ . DIRECTORY_SEPARATOR . 'uploads';
+
+        if (!is_dir($thuMucAnh) && !mkdir($thuMucAnh, 0775, true)) {
+            $loi['anhDaiDien'] = 'Không thể tạo thư mục lưu ảnh.';
+        } else {
+            $tenTepMoi = uniqid('avatar_', true) . '.' . $duoiTepAnh;
+            $duongDanLuu = $thuMucAnh . DIRECTORY_SEPARATOR . $tenTepMoi;
+
+            if (!move_uploaded_file($anhDaiDien['tmp_name'], $duongDanLuu)) {
+                $loi['anhDaiDien'] = 'Không thể lưu ảnh đại diện. Vui lòng thử lại.';
+            } else {
+                $thanhCong = true;
+                $hoTen = '';
+                $email = '';
+                $chuDe = 'Hỗ trợ kỹ thuật';
+                $noiDung = '';
+            }
+        }
     }
 }
 
@@ -64,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             <?php endif; ?>
 
-            <form method="POST" novalidate>
+            <form method="POST" enctype="multipart/form-data" novalidate>
                 <div class="form-group">
                     <label for="hoTen">Họ tên <span>*</span></label>
                     <input
@@ -121,6 +159,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     ><?= hienThiAnToan($noiDung) ?></textarea>
                     <?php if (isset($loi['noiDung'])): ?>
                         <small class="error"><?= hienThiAnToan($loi['noiDung']) ?></small>
+                    <?php endif; ?>
+                </div>
+
+                <div class="form-group">
+                    <label for="anhDaiDien">Ảnh đại diện <span>*</span></label>
+                    <input
+                        id="anhDaiDien"
+                        type="file"
+                        name="anhDaiDien"
+                        accept="image/jpeg,image/png,image/gif,image/webp"
+                    >
+                    <small class="file-note">Chấp nhận JPG, PNG, GIF hoặc WEBP; tối đa 2 MB.</small>
+                    <?php if (isset($loi['anhDaiDien'])): ?>
+                        <small class="error"><?= hienThiAnToan($loi['anhDaiDien']) ?></small>
                     <?php endif; ?>
                 </div>
 
