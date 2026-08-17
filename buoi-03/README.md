@@ -15,17 +15,6 @@
 - Giữ lại dữ liệu đã nhập nếu form có lỗi.
 - Hiển thị thông báo khi gửi liên hệ thành công.
 
-## Cách chạy
 
-Tại thư mục gốc của repository, chạy:
-
-```cmd
-C:\xampp\php\php.exe -S localhost:800
-```
-
-Sau đó truy cập:
-
-```text
-http://localhost:800/buoi-03/bai-tap-tren-lop/bai-01/form-lien-he.php
 ```
 
