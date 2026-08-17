@@ -30,8 +30,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $loi['email'] = 'Email không đúng định dạng.';
     }
 
+    $doDaiNoiDung = mb_strlen($noiDung, 'UTF-8');
+
     if ($noiDung === '') {
         $loi['noiDung'] = 'Vui lòng nhập nội dung liên hệ.';
+    } elseif ($doDaiNoiDung < 10 || $doDaiNoiDung > 500) {
+        $loi['noiDung'] = 'Nội dung phải có từ 10 đến 500 ký tự.';
     }
 
     if ($anhDaiDien === null || $anhDaiDien['error'] === UPLOAD_ERR_NO_FILE) {
@@ -155,7 +159,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         id="noiDung"
                         name="noiDung"
                         rows="6"
-                        placeholder="Nhập nội dung liên hệ"
+                        minlength="10"
+                        maxlength="500"
+                        placeholder="Nhập nội dung liên hệ từ 10 đến 500 ký tự"
                     ><?= hienThiAnToan($noiDung) ?></textarea>
                     <?php if (isset($loi['noiDung'])): ?>
                         <small class="error"><?= hienThiAnToan($loi['noiDung']) ?></small>
