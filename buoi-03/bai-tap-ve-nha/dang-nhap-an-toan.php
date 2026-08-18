@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-// Phát triển từ Form đăng nhập cơ bản của bài tập về nhà Buổi 2.
+
 $thuMucSession = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'ltweb_ca_nhan_sessions';
 
 if (!is_dir($thuMucSession) && !mkdir($thuMucSession, 0775, true)) {
