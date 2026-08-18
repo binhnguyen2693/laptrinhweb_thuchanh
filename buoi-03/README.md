@@ -19,6 +19,8 @@
 
 - [Form đăng nhập an toàn](./bai-tap-ve-nha/dang-nhap-an-toan.php)
 
+Bài này phát triển từ [Form đăng nhập cơ bản của Buổi 2](../buoi-02/bai-tap-ve-nha/form-dang-nhap.php).
+
 ### Nội dung
 
 - Kiểm tra email và mật khẩu bắt buộc ở phía server.
