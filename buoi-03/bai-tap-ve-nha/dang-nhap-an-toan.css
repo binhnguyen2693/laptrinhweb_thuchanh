@@ -1,0 +1,159 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    color: #243044;
+    font-family: Arial, sans-serif;
+    background: #f3f6fb;
+}
+
+.login-page {
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 16px;
+}
+
+.login-card {
+    width: min(500px, 100%);
+    padding: 32px;
+    background: white;
+    border: 1px solid #dfe5ee;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(31, 45, 61, 0.08);
+}
+
+.login-heading {
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.login-heading h1 {
+    margin: 0 0 8px;
+    color: #3157a4;
+    font-size: 30px;
+}
+
+.login-heading p {
+    margin: 0;
+    color: #667085;
+}
+
+.login-form {
+    display: grid;
+    gap: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: 600;
+}
+
+.form-group label span {
+    color: #d92d20;
+}
+
+input,
+button {
+    width: 100%;
+    padding: 11px 12px;
+    font: inherit;
+    border-radius: 7px;
+}
+
+input {
+    color: #243044;
+    background: white;
+    border: 1px solid #cbd5e1;
+    outline: none;
+}
+
+input:focus {
+    border-color: #3157a4;
+    box-shadow: 0 0 0 3px rgba(49, 87, 164, 0.12);
+}
+
+input[aria-invalid="true"] {
+    border-color: #d92d20;
+}
+
+.error {
+    display: block;
+    margin-top: 6px;
+    color: #d92d20;
+}
+
+.required-note {
+    margin: -4px 0 0;
+    color: #667085;
+    font-size: 14px;
+}
+
+button {
+    color: white;
+    font-weight: 700;
+    background: #3157a4;
+    border: 0;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #274783;
+}
+
+.message {
+    margin-bottom: 20px;
+    padding: 12px 14px;
+    border-radius: 7px;
+}
+
+.message.success {
+    color: #166534;
+    background: #dcfce7;
+    border: 1px solid #86efac;
+}
+
+.message.error-message {
+    color: #991b1b;
+    background: #fee2e2;
+    border: 1px solid #fca5a5;
+}
+
+.demo-account,
+.account-box {
+    margin-top: 20px;
+    padding: 16px;
+    background: #f1f5f9;
+    border-radius: 7px;
+}
+
+.demo-account {
+    display: grid;
+    gap: 4px;
+    color: #475569;
+    font-size: 14px;
+}
+
+.account-box h2 {
+    margin-top: 0;
+}
+
+.logout-button {
+    margin-top: 8px;
+    color: #3157a4;
+    background: #e8eef8;
+}
+
+.logout-button:hover {
+    background: #d9e3f3;
+}
+
+@media (max-width: 600px) {
+    .login-card {
+        padding: 22px 18px;
+    }
+}

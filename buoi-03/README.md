@@ -15,5 +15,26 @@
 - Giữ lại dữ liệu đã nhập nếu form có lỗi.
 - Hiển thị thông báo khi gửi liên hệ thành công.
 
+## Bài tập về nhà
 
+- [Form đăng nhập an toàn](./bai-tap-ve-nha/dang-nhap-an-toan.php)
+
+### Nội dung
+
+- Kiểm tra email và mật khẩu bắt buộc ở phía server.
+- Email phải đúng định dạng và không quá 254 ký tự.
+- Mật khẩu phải có từ 8 đến 72 ký tự.
+- Chuẩn hóa email bằng cách xóa khoảng trắng và chuyển về chữ thường.
+- Hiển thị lỗi tại trường tương ứng và giữ lại email khi form có lỗi.
+- Không điền lại mật khẩu khi form có lỗi.
+- Mã hóa dữ liệu khi hiển thị bằng `htmlspecialchars()` để hạn chế XSS.
+- Kiểm tra mật khẩu mẫu bằng `password_verify()` và lưu trạng thái bằng session
+  trong thư mục tạm của hệ điều hành.
+- Chưa sử dụng cơ sở dữ liệu theo yêu cầu Buổi 3.
+
+Tài khoản thử nghiệm:
+
+```text
+Email: admin@storyhub.vn
+Mật khẩu: Admin@123
 ```
